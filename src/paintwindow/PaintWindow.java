@@ -46,14 +46,15 @@ public class PaintWindow extends JFrame {
 
     public void showImage(Icon icon, int x, int y) {
         int index;
-        if (icon == null) {
+        if (icon == null)
             return;
-        }
+        
         IconXY newIcon = new IconXY(icon, x, y);
         index = icons.indexOf(newIcon);
+        
         if (index == -1) {
             icons.add(new IconXY(icon, x, y));
-        } else {
+    	} else {
             icons.get(index).setX(x);
             icons.get(index).setY(y);
         }
@@ -62,9 +63,10 @@ public class PaintWindow extends JFrame {
     
     public void hideImage(Icon icon) {
         int index;
-        if (icon == null) {
+        
+        if (icon == null)
             return;
-        }
+
         IconXY newIcon = new IconXY(icon, 0, 0);
         index = icons.indexOf(newIcon);
         if (index != -1) {

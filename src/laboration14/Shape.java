@@ -1,6 +1,8 @@
 package laboration14;
-import gu2.PaintWindow_GU2;
+
 import java.awt.*;
+
+import paintwindow.PaintWindow;
 
 public abstract class Shape {
     protected int x,y;
@@ -20,5 +22,5 @@ public abstract class Shape {
         this.color = color;
     }
     
-    public abstract void paint(PaintWindow_GU2 window);
+    public abstract void paint(PaintWindow window);
 }
