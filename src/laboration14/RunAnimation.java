@@ -2,11 +2,15 @@ package laboration14;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
-import gu2.PaintWindow_GU2;
+
+import paintwindow.PaintWindow;
 
 public class RunAnimation {
 	public static void main(String[] args) {
-		PaintWindow_GU2 window = new PaintWindow_GU2(800,600,"Uppgift 5",Color.WHITE); 
+		PaintWindow window = new PaintWindow();
+		window.setSize(800, 600);
+		window.setTitle("Uppgift 5");
+		window.setBackground(Color.WHITE);
 		ImageIcon[] images = new ImageIcon[10]; 
 		
 		for(int i=0; i<images.length; i++) {     
@@ -17,7 +21,7 @@ public class RunAnimation {
 		
 		for(int i=0; i<100; i++) {     
 			anim.paint(window);
-			PaintWindow_GU2.pause(50);
+			PaintWindow.pause(50);
 		}
 	}
 }

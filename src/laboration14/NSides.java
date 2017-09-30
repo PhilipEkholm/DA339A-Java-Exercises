@@ -1,13 +1,14 @@
 package laboration14;
 
 import java.awt.Color;
-import gu2.PaintWindow_GU2;
+
+import paintwindow.PaintWindow;
 
 public class NSides extends Shape{
 	private Point[] points;
 
 	@Override
-	public void paint(PaintWindow_GU2 window) {
+	public void paint(PaintWindow window) {
 		
 		for(int i = 0; i < points.length - 1; i++){
 			int x1 = points[i].getX() + super.x,

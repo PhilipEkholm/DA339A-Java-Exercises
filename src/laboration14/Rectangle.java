@@ -1,7 +1,8 @@
 package laboration14;
 
 import java.awt.Color;
-import gu2.PaintWindow_GU2;
+
+import paintwindow.PaintWindow;
 
 public class Rectangle extends Shape{
 	
@@ -9,7 +10,7 @@ public class Rectangle extends Shape{
 	private Color color;
 
 	@Override
-	public void paint(PaintWindow_GU2 window) {
+	public void paint(PaintWindow window) {
 		window.drawRect(this.x, this.y, this.width, this.height, this.color, 1);
 	}
 	

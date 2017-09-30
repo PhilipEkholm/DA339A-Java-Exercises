@@ -2,7 +2,7 @@ package laboration14;
 
 import java.awt.Color;
 
-import gu2.PaintWindow_GU2;
+import paintwindow.PaintWindow;
 
 public class RunNSides {
 	public static void main(String[] args) {
@@ -21,7 +21,11 @@ public class RunNSides {
 		NSides star2 = new NSides(100, 150, p, Color.GREEN); 
 		NSides star3 = new NSides(175, 125, p, Color.BLUE); 
 		
-		PaintWindow_GU2 window = new PaintWindow_GU2(600,400,"Uppgift 4b",Color.WHITE); 
+		PaintWindow window = new PaintWindow();
+		window.setSize(600, 400);
+		window.setTitle("Uppgift 4b");
+		window.setBackground(Color.WHITE);
+		
 		star1.paint(window); 
 		star2.paint(window);
 		star3.paint(window);

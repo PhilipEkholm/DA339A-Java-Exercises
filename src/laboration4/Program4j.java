@@ -2,7 +2,8 @@ package laboration4;
 import java.awt.*; // Color, Font
 import java.util.Calendar;
 import javax.swing.ImageIcon;
-import gu1.PaintWindow_GU1;
+
+import paintwindow.PaintWindow;
 
 public class Program4j {
 
@@ -35,8 +36,6 @@ public class Program4j {
             	season = "autumn";
             	break;
         }
-        PaintWindow_GU1.showWindow(image.getIconWidth(), image.getIconHeight(), "Program 4j", image, 0, 0);
-        PaintWindow_GU1.addText("test", season, 0, 0, customFont, Color.WHITE);
     }
 
     public static void main(String[] args) {
