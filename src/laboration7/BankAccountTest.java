@@ -4,14 +4,10 @@
  */
 package laboration7;
 import javax.swing.*;
-
-
 /**
  * Programmet testar klassen BankAcccount
  * @author Rolf Axelsson
  */
-
-
 public class BankAccountTest {
     public void test() {
         BankAccount account1 = new BankAccount( "399.847.500" );

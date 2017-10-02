@@ -1,17 +1,11 @@
 package laboration7;
 
 public class Table {
-	private String material;
-	private double width,
-					height,
-					depth;
+	private String 	material;
 	
-	public Table(String material, double width, double height, double depth){
-		this.material = material;
-		this.width = width;
-		this.height = height;
-		this.depth = depth;
-	}
+	private int width,
+				depth,
+				height;
 
 	public String getMaterial() {
 		return material;
@@ -21,36 +15,36 @@ public class Table {
 		this.material = material;
 	}
 
-	public double getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
-	public void setWidth(double width) {
+	public void setWidth(int width) {
 		this.width = width;
 	}
 
-	public double getHeight() {
-		return height;
-	}
-
-	public void setHeight(double height) {
-		this.height = height;
-	}
-
-	public double getDepth() {
+	public int getDepth() {
 		return depth;
 	}
 
-	public void setDepth(double depth) {
+	public void setDepth(int depth) {
 		this.depth = depth;
 	}
-	
-	public double surfaceArea(){
-		return this.width * this.depth;
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
 	@Override
 	public String toString() {
-		return "Table [material=" + material + ", width=" + width + ", height=" + height + ", depth=" + depth + "]";
+		return "Table [material=" + material + ", width=" + width + ", depth=" + depth + ", height=" + height + "]";
+	}
+	
+	public int size() {
+		return (width * depth);
 	}
 }

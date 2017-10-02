@@ -4,19 +4,31 @@ import javax.swing.JOptionPane;
 
 public class BankAccount {
 	private String accountNbr;
-	private double balance,
+	private double 	balance,
 					interestRate;
 	
-	public BankAccount(String accountNbr){
-		this.accountNbr = accountNbr;
-		this.balance = 0.0;
-		this.interestRate = 0.005;
+	public BankAccount(String accountNumber) {
+		this.accountNbr = accountNumber;
+		balance = 0;
+		interestRate = 0.005;
 	}
 	
-	public BankAccount(String accountNbr, double balance, double interestRate){
-		this.accountNbr = accountNbr;
+	public BankAccount(String accountNumber, double balance, double interestRate) {
+		this.accountNbr = accountNumber;
 		this.balance = balance;
 		this.interestRate = interestRate;
+	}
+	
+	public void deposit(double amount) {
+		balance += amount;
+	}
+	
+	public void withdrawal(double amount) {
+		balance -= amount;
+	}
+	
+	public void info() {
+		JOptionPane.showMessageDialog(null, "Account number: " + accountNbr + "\n" + "Balance: " + balance);
 	}
 
 	public double getInterestRate() {
@@ -34,43 +46,4 @@ public class BankAccount {
 	public double getBalance() {
 		return balance;
 	}
-	
-	public void deposit(double amount){
-		this.balance += amount;
-	}
-	
-	public void withdrawal(double amount){
-		this.balance -= amount;
-	}
-	
-	public void info(){
-		JOptionPane.showMessageDialog(null, "Account number: " + this.accountNbr + "\n" + "Balance: " + this.balance);
-	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

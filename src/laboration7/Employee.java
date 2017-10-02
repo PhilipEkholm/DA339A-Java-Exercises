@@ -1,11 +1,12 @@
 package laboration7;
 
 public class Employee {
-	private String name,
-			employer;
+	private String 	name,
+					employer;
+	
 	private double wage;
 	
-	public Employee(String name, String employer, double wage){
+	public Employee(String name, String employer, double wage) {
 		this.name = name;
 		this.employer = employer;
 		this.wage = wage;
@@ -39,4 +40,5 @@ public class Employee {
 	public String toString() {
 		return "Employee [name=" + name + ", employer=" + employer + ", wage=" + wage + "]";
 	}
+	
 }
