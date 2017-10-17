@@ -105,7 +105,7 @@ public class SurveyPanel extends JPanel{
 			}
 			res+= "\n";
 			
-			//Visa texten
+			/* Show the text */
 			taSummary.setText(res);
 		}
 	}

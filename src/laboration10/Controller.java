@@ -4,7 +4,7 @@ import java.io.File;
 
 import javax.swing.JOptionPane;
 
-public class Controller {
+public final class Controller {
 	private ImageViewer viewer;
 	
 	public Controller(ImageViewer inViewer){
@@ -18,14 +18,12 @@ public class Controller {
 		File f = new File(filePath);
 		
 		if(f.exists()){
-			if(suffix.equals("jpg") || suffix.equals("gif") || suffix.equals("png")){
+			if(suffix.equals("jpg") || suffix.equals("gif") || suffix.equals("png"))
 				viewer.showImage(filePath);
-			}
-			else{
+			else
 				JOptionPane.showMessageDialog(null, "Felaktig filtyp: " + suffix);
-			}
 		}
-		else{
+		else {
 			JOptionPane.showMessageDialog(null, "Filen existerar inte :(");
 		}
 	}

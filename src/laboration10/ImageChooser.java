@@ -3,59 +3,70 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class ImageChooser extends JPanel{
+public final class ImageChooser extends JPanel{
+	/* Ser. Version def. ID required to avoid warning */
 	private static final long serialVersionUID = 1L;
-	private JPanel pnlRadioButtons = new JPanel(new GridLayout(5, 1));
-	private JRadioButton rb1, rb2, rb3, rb4, rb5;
+
+	private JPanel pnlRadioButtons;
+	private JRadioButton[] rb;
 	private JButton btn;
-	private Controller controller;
+	private final Controller controller;
+	private final String[] imgPaths = {
+		"images/london06.jpg",
+		"images/filmlogga.jpg",
+		"images/lugi.gif",
+		"images/tandem1.jpg",
+		"images/program.bmp",
+	};
 	
 	public ImageChooser(Controller controller){
 		this.controller = controller;
-		pnlRadioButtons.add(rb1);
-		pnlRadioButtons.add(rb2);
-		pnlRadioButtons.add(rb3);
-		pnlRadioButtons.add(rb4);
-		pnlRadioButtons.add(rb5);
-		this.addListeners();
-		this.add(pnlRadioButtons, BorderLayout.CENTER);
-		this.add(btn, BorderLayout.SOUTH);
+		
+		initializeComponents();
+		addListeners();
+		
+		add(pnlRadioButtons, BorderLayout.CENTER);
+		add(btn, BorderLayout.SOUTH);
+	}
+	
+	private void initializeComponents() {
+		final int 	NBR_RADIO_BUTTONS = 5,
+					GRID_WIDTH = 5,
+					GRID_HEIGHT = 1;
+		
+		rb = new JRadioButton[NBR_RADIO_BUTTONS];
+		pnlRadioButtons = new JPanel(new GridLayout(GRID_WIDTH, GRID_HEIGHT));
+		btn = new JButton();
+		
+		for (int i = 0; i < NBR_RADIO_BUTTONS; ++i) {
+			rb[i] = new JRadioButton();
+			pnlRadioButtons.add(rb[i]);
+		}
 	}
 	
 	public void addListeners(){
 		ImageListener listener = new ImageListener();
-		rb1.addActionListener( listener );
-		rb2.addActionListener( listener );
-		rb3.addActionListener( listener );
-		rb4.addActionListener( listener );
-		rb5.addActionListener( listener );
+
+		for (int i = 0; i < rb.length; ++i) {
+			rb[i].addActionListener(listener);
+		}
+		
 		btn.addActionListener( new EraseListener() );
 	}
 	
-	private class EraseListener implements ActionListener{
+	private final class EraseListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			controller.eraseImage();
-		}	
+		}
 	}
 	
-	private class ImageListener implements ActionListener{
+	private final class ImageListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if( rb1.isSelected() ){
-				controller.newImage("images/london06.jpg");
-			}
-			else if(rb1.isSelected()){
-				controller.newImage("images/filmlogga.jpg");
-			}	
-			else if(rb3.isSelected()){
-				controller.newImage("images/lugi.gif");
-			}
-			else if(rb4.isSelected() ){
-				controller.newImage("images/tandem1.jpg");
-			}
-			else if(rb5.isSelected()){
-				controller.newImage("images/program.bmp");
+			for (int i = 0; i < rb.length; ++i) {
+				if (rb[i].isSelected())
+					controller.newImage(imgPaths[i]);
 			}
 		}
 	}
