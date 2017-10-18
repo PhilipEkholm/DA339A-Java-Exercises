@@ -5,8 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.*;
 import java.util.Random;
 
-public class ColorPanel extends JPanel{
+public class ColorChooser extends JPanel{
 	private static final long serialVersionUID = 1L;
+	private ColorController controller;
 	private JLabel colorLabel = new JLabel("Välj färg");
 	private Font standardFont = new Font("Arial", Font.PLAIN, 14);
 	private JRadioButton rbRed = new JRadioButton("Röd"),
@@ -14,21 +15,25 @@ public class ColorPanel extends JPanel{
 						rbBlue = new JRadioButton("Blå"),
 						rbRandom = new JRadioButton("Slumpmässig");
 
-	public ColorPanel(){
-		this.setPreferredSize(new Dimension(200, 150));
+	public ColorChooser(ColorController controller){
+		this.controller = controller;
+		this.setLayout(new GridLayout(5, 1));
 		this.setBackground(Color.RED);
+		this.setButtonGroup();
 		
+		this.setDimensions();
+		this.setFonts();
+		this.addListeners();
+		this.addComponents();
+	}
+	
+	private void setButtonGroup(){
 		ButtonGroup group = new ButtonGroup();
 		group.add(rbRed);
 		group.add(rbGreen);
 		group.add(rbBlue);
 		group.add(rbRandom);
 		rbRed.setSelected(true);
-		
-		this.setDimensions();
-		this.setFonts();
-		this.addListeners();
-		this.addComponents();
 	}
 	
 	private void setDimensions(){
@@ -64,18 +69,18 @@ public class ColorPanel extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			if(rbRed.isSelected() == true){
-				setBackground(Color.RED);
+				controller.setColor(new Color(255, 0 , 0));
 			}
 			else if(rbGreen.isSelected() == true){
-				setBackground(Color.GREEN);
+				controller.setColor(new Color(0, 255, 0));
 			}
 			else if(rbBlue.isSelected() == true){
-				setBackground(Color.BLUE);
+				controller.setColor(new Color(0, 0, 255));
 			}
 			else if(rbRandom.isSelected() == true){
 				Random rand = new Random();
 				Color color = new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
-				setBackground(color);
+				controller.setColor(color);
 			}
 		}
 	}
