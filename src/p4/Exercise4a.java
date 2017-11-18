@@ -1,6 +1,7 @@
 package p4;
 
 import javax.swing.JOptionPane;
+
 import arrays.IntegerArray;
 
 public class Exercise4a {
@@ -31,8 +32,9 @@ public class Exercise4a {
         IntegerArray.sortDesc(test2);
         message += "test1: " + IntegerArray.toString( test1 ) + "\n";
         message += "test2: " + IntegerArray.toString( test2 ) + "\n";
-        message += "test2: " + IntegerArray.median( test2 ) + "\n";
-        message += "Mest frekventa tal: " + IntegerArray.mode(test1);
+        
+        message += "Median: " + IntegerArray.median(test2) + "\n";
+        message += "Typvärde: " + IntegerArray.mode(test2) + "\n";
         JOptionPane.showMessageDialog( null, message );
     }
 }

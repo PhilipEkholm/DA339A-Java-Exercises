@@ -1,231 +1,132 @@
 package arrays;
 
+import java.util.Arrays;
+
 public class IntegerArray {
-	
-	//Skriver ut array på rå form
-	public static String toString(int[] array){
-		String res = "{";
+	public static int max(int[] array) {
+		int max = array[0];
 		
-		for(int i = 0; i < array.length; i++){
-			res += array[i];
-			
-			//Kontrollera om man ska sätta ett komma till eller om vi nått slutet
-			if(!(i == array.length -1)){
-				res += ", ";
-			}
+		for (int key: array) {
+			if (max < key)
+				max = key;
 		}
 		
-		return res + "}";
+		return max;
 	}
 	
-	public static int max(int[] array){
-		int maximalValue = Integer.MIN_VALUE; //Talet i fråga kan vara negativt (<0)
+	public static int min(int[] array) {
+		int min = array[0];
 		
-		for(int key: array){
-			maximalValue = Math.max(maximalValue, key);
+		for (int key: array) {
+			if (min > key)
+				min = key;
 		}
 		
-		return maximalValue;
+		return min;
 	}
 	
-	public static int min(int[] array){
-		int minimalValue = Integer.MAX_VALUE;
-		
-		for(int key: array){
-			minimalValue = Math.min(minimalValue, key);
-		}
-		
-		return minimalValue;
-	}
-	
-	public static int sum(int[] array){
+	public static int sum(int[] array) {
 		int sum = 0;
 		
-		for(int key: array){
+		for (int key: array) {
 			sum += key;
 		}
 		
 		return sum;
 	}
 	
-	public static double average(int[] array){
-		double sum = 0;
-		
-		for(int key: array){
-			sum += key;
-		}
-		
-		return (sum / array.length);
+	public static double average(int[] array) {
+		return (double)IntegerArray.sum(array) / array.length;
 	}
 	
-	public static int range(int[] array){
-		return (IntegerArray.max(array) - IntegerArray.min(array));
+	public static int range(int[] array) {
+		return Math.abs((IntegerArray.max(array) - IntegerArray.min(array)));
 	}
 	
-	public static int[] reverse(int[] array){
-		int[] reversedArray = new int[array.length];
-		int k = 0;
-		
-		//Kopiera array och sedan skriv över i reverse
-		
-		for(int i = array.length -1; i >= 0; i--){
-			reversedArray[i] = array[k];
-			k++;
-		}
-		
-		for(int i = 0; i < array.length; i++){
-			array[i] = reversedArray[i];
-		}
-		
-		return array;
+	public static void sortAsc(int[] array) {
+		Arrays.sort(array);
 	}
 	
-	//Denna sortering görs med bubbelsortering
-	
-	public static int[] sortAsc(int[] array) {
-	    boolean swapped = true;
-	    int j = 0;
-	    int tmp;
-	    
-	    while (swapped) {
-	        swapped = false;
-	        j++;
-	        
-	        for (int i = 0; i < array.length - j; i++) {
-	            if (array[i] > array[i + 1]) {
-	                tmp = array[i];
-	                array[i] = array[i + 1];
-	                array[i + 1] = tmp;
-	                swapped = true;
-	            }
-	        }
-	    }
-	    
-	    return array;
+	public static void sortDesc(int[] array) {
+		Arrays.sort(array);
+		IntegerArray.reverse(array);
 	}
 	
-	public static int[] sortDesc(int[] array){
-		IntegerArray.sortAsc(array); //Detta fungerar då du skickar referens och inte kopia
-		IntegerArray.reverse(array); //Jag har redan skrivit en reverse funktion
-		
-		return array;
-	}
-	
-	public static int[] copy(int[] array){
+	public static void reverse(int[] array) {
 		int[] newArray = new int[array.length];
 		
-		for(int i = 0; i < array.length; i++){
+		for (int i = 0; i < array.length; ++i) {
+			newArray[(array.length - 1) - i] = array[i];
+		}
+		
+		for (int i = 0; i < array.length; ++i) {
+			array[i] = newArray[i];
+		}
+	}
+	
+	public static int[] copy(int[] array) {
+		int[] newArray = new int[array.length];
+		
+		for (int i = 0; i < array.length; ++i) {
 			newArray[i] = array[i];
 		}
 		
 		return newArray;
 	}
 	
-	/*
-	 *	Fel i algoritmen om antalet element är jämna. 
-	*/
-	
-	public static double median(int[] array){
-		int[] newArray = IntegerArray.copy(array);
+	public static int median(int[] array) {
+		int[] sortedArray = IntegerArray.copy(array);
+		int centerIndex, median;
 		
-		IntegerArray.sortAsc(newArray);
+		IntegerArray.sortAsc(sortedArray);
 		
-		int middle = newArray.length/2;
-		double medianValue = 0;
-		
-		if (newArray.length%2 == 1){
-		    medianValue = newArray[middle];
+		/* Check if array has an odd number of elements */
+		if (array.length % 2 == 1) {
+			/* Take the middle value */
+			median = sortedArray[sortedArray.length / 2];
 		}
-		else{
-		   medianValue = (newArray[middle-1] + newArray[middle]) / 2;
+		/* Array has an even number of elements */
+		else {
+			centerIndex = (sortedArray.length - 1) / 2;
+			median = (sortedArray[centerIndex] + sortedArray[centerIndex + 1]) / 2;
 		}
 		
-		return medianValue;
+		return median;
 	}
 	
-	/*
-	 *	Måste bestämma vilket tal som ska skrivas ut om flera är lika förekommande 
-	 */
-	public static int mode(int[] a){
-		int count = 1, tempCount;
-		int popular = a[0];
-		int temp = 0;
-	  
-		for (int i = 0; i < (a.length - 1); i++){
-			temp = a[i];
-			tempCount = 0;
+	public static int mode(int[] array) {
+		int[] sortedArray = IntegerArray.copy(array);
+		int consecs = 0, longestConsec = 0, mode = 0;
+		
+		IntegerArray.sortAsc(sortedArray);
+		
+		for (int i = 0; i < sortedArray.length -1; ++i) {
+			if (sortedArray[i] == sortedArray[i + 1])
+				consecs++;
+			else 
+				consecs = 0;
 			
-			for (int j = 1; j < a.length; j++){
-				if (temp == a[j]){
-					tempCount++;
-				}
-			}
-	    
-			if (tempCount > count){
-				popular = temp;
-				count = tempCount;
+			if (consecs > longestConsec) {
+				longestConsec = consecs;
+				mode = sortedArray[i];
 			}
 		}
 		
-		return popular;
+		return mode;
 	}
 	
-	public static int findFirstTargetIndex(int target, int[] array){
-		for(int i = 0; i < array.length; i++){
-			if(target == array[i]){
-				return i;
-			}
+	public static String toString(int[] array) {
+		String res = "";
+		
+		for (int key: array) {
+			res += key + ",";
 		}
 		
-		return -1;
-	}
-	
-	public static int[] cut(int[] array, int startIndex, int stopIndex){
-		int[] reducedArray;
+		res = res.substring(0, res.length() - 1);
 		
-		if(startIndex > stopIndex){
-			int tmp;
-			
-			tmp = startIndex;
-			startIndex = stopIndex;
-			stopIndex = tmp;
-		}
-		
-		reducedArray = new int[(stopIndex + 1) - startIndex];
-		
-		int k = 0;
-		for(int i = startIndex; i <= stopIndex; i++){
-			reducedArray[k] = array[i];
-			k++;
-		}
-		
-		return reducedArray;
+		return ("{" + res + "}");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,89 +1,54 @@
 package arrays;
 
 public class CountryArrays {
-	public static String toString(Country[] array){
-		String res = "";
+	public static Country max(Country[] countries) {
+		Country max = countries[0];
 		
-		res += "{";
-		
-		for(int i = 0; i < array.length; i++){
-			res += "[" + array[i].getName() + ", " + array[i].getPopulation() + "]";
-			
-			if(!(i == array.length - 1)){
-				res += ",";
-			}
+		for (Country country: countries) {
+			if (max.compareTo(country) > 0)
+				max = country;
 		}
 		
-		res += "}";
-		
-		return res;
+		return max;
 	}
 	
-	public static int indexOf(Country[] array, Country country){
-		for(int i = 0; i < array.length; i++){
-			if(array[i].equals(country)){
-				return i;
-			}
-		}
+	public static Country min(Country[] countries) {
+		Country min = countries[0];
 		
-		return -1;
-	}
-	
-	public static boolean member(Country[] array, Country country){
-		for(int i = 0; i < array.length; i++){
-			if(array[i].equals(country)){
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	public static Country min(Country[] array){
-		Country min = array[0];
-		
-		for(int i = 0; i < array.length; i++){
-			if(min.compareTo(array[i]) > 0){
-				min = array[i];
-			}
+		for (Country country: countries) {
+			if (min.compareTo(country) < 0)
+				min = country;
 		}
 		
 		return min;
 	}
 	
-	public static Country max(Country[] array){
-		Country max = array[0];
+	public static int indexOf(Country[] countries, Country country) {
 		
-		for(int i = 0; i < array.length; i++){
-			if(max.compareTo(array[i]) < 0){
-				max = array[i];
-			}
+		for (int i = 0; i < countries.length; ++i) {
+			if (countries[i].equals(country))
+				return i;
 		}
 		
-		return max;
+		return -1;
+	}
+	
+	public static boolean member(Country[] countries, Country country) {
+		return (CountryArrays.indexOf(countries, country) != -1 ? true : false);
+	}
+	
+	public static String toString(Country[] countries) {
+		String res = "";
+		
+		for (Country country: countries) {
+			res += country + ",";
+		}
+		
+		res = res.substring(0, res.length() - 1);
+		
+		return ("{" + res + "}");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -2,17 +2,17 @@ package p4;
 
 import javax.swing.JOptionPane;
 
-import arrays.Integer2dArrays;
+import arrays.Integer2DArrays;
 
 public class Exercise4b {
 	public void testArray(int[][] array) {
 		String message = "";
-		message += "toString: " + Integer2dArrays.toString( array ) + "\n";
-		message += "elements: " + Integer2dArrays.elements( array ) + "\n";
-		message += "max: " + Integer2dArrays.max( array ) + "\n";
-		message += "min: " + Integer2dArrays.min( array ) + "\n";
-		message += "sum: " + Integer2dArrays.sum( array ) + "\n";
-		message += "average: " + String.format( "%1.2f", Integer2dArrays.average( array ) ) + "\n";
+		message += "toString: " + Integer2DArrays.toString( array ) + "\n";
+		message += "elements: " + Integer2DArrays.elements( array ) + "\n";
+		message += "max: " + Integer2DArrays.max( array ) + "\n";
+		message += "min: " + Integer2DArrays.min( array ) + "\n";
+		message += "sum: " + Integer2DArrays.sum( array ) + "\n";
+		message += "average: " + String.format( "%1.2f", Integer2DArrays.average( array ) ) + "\n";
 		JOptionPane.showMessageDialog( null, message );
 	}
 	

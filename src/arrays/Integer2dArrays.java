@@ -1,131 +1,57 @@
 package arrays;
 
-/*
- *	Biblioteket skrivet av Philip Ekholm
- *
- * 	En vidareutveckling av biblioteket ArraySupporter som skrevs några labbar tillbaka
- * 	för att underlätta programmeringen.
-*/
-
-public class Integer2dArrays {
-	public static String toString(int[][] array){
-		String res = "";
-		res += "{";
+public class Integer2DArrays {
+	public static int elements(int[][] array) {
+		int elements = 0;
 		
-		for(int i = 0; i < array.length; i++){
-			res += "{";
-			
-			for(int j = 0; j < array[i].length; j++){
-				res += array[i][j];
-				
-				if(!(j == array[i].length - 1)){
-					res += ", ";
-				}
-			}
-			
-			res += "}";
-			
-			if(!(i == array.length - 1)){
-				res += ",";
-			}
-		}
+		for (int[] key: array)
+			elements += key.length;
 		
-		res += "}";
-		
-		return res;
+		return elements;
 	}
 	
-	public static int elements(int[][] array){
-		int amountOfElements = 0;
+	public static int max(int[][] array) {
+		int max = array[0][0];
 		
-		for(int i = 0; i < array.length; i++){
-			for(int j = 0; j < array[i].length; j++){
-				amountOfElements++;
-			}
+		for (int[] key: array) {
+			max = (max < IntegerArray.max(key) ? IntegerArray.max(key): max); 
 		}
 		
-		return amountOfElements;
+		return max;
 	}
 	
-	public static int max(int[][] array){
-		int maximalValue = Integer.MIN_VALUE;
+	public static int min(int[][] array) {
+		int min = 0;
 		
-		for(int i = 0; i < array.length; i++){
-			for(int j = 0; j < array[i].length; j++){
-				maximalValue = Math.max(maximalValue, array[i][j]);
-			}
+		for (int[] key: array) {
+			min = (min > IntegerArray.min(key) ? IntegerArray.min(key): min); 
 		}
 		
-		return maximalValue;
+		return min;
 	}
 	
-	public static int min(int[][] array){
-		int minimalValue = Integer.MAX_VALUE;
-		
-		for(int i = 0; i < array.length; i++){
-			for(int j = 0; j < array[i].length; j++){
-				minimalValue = Math.min(minimalValue, array[i][j]);
-			}
-		}
-		
-		return minimalValue;
-	}
-	
-	public static int sum(int[][] array){
+	public static int sum(int[][] array) {
 		int sum = 0;
 		
-		for(int i = 0; i < array.length; i++){
-			for(int j = 0; j < array[i].length; j++){
-				sum += array[i][j];
-			}
+		for (int[] key: array) {
+			sum += IntegerArray.sum(key);
 		}
 		
 		return sum;
 	}
 	
-	public static double average(int[][] array){
-		double 	sum = 0,
-				average;
+	public static double average(int[][] array) {
+		return (double)Integer2DArrays.sum(array) / Integer2DArrays.elements(array);
+	}
+	
+	public static String toString(int[][] array) {
+		String res = "";
 		
-		for(int i = 0; i < array.length; i++){
-			for(int j = 0; j < array[i].length; j++){
-				sum += array[i][j];
-			}
-		}
+		for (int[] key: array)
+			res += IntegerArray.toString(key) + ",";
 		
+		res = res.substring(0, res.length() - 1);
 		
-		
-		average = sum / (Integer2dArrays.elements(array));
-		return average;
+		return ("{" + res + "}");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
